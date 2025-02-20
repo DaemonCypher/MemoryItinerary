@@ -1,0 +1,44 @@
+{{yield}}
+<div class="d-flex flex-column justify-content-center align-items-center gap-3">
+  {{#if this.mobile}}
+    <label for="camera-input" class="file-input-label mb-2">Take a Picture</label>
+    <input
+      id="camera-input"
+      type="file"
+      accept="image/*"
+      capture="environment"
+      {{on "change" this.handleCameraInput}}
+      class="hidden-input"
+    />
+
+    <label for="gallery-input" class="file-input-label mb-2">Upload from Gallery</label>
+    <input
+      id="gallery-input"
+      type="file"
+      accept="image/*"
+      {{on "change" this.handleGalleryInput}}
+      class="hidden-input"
+      multiple
+    />
+  {{else}}
+    <label for="gallery-input" class="file-input-label mb-2">Upload from Gallery</label>
+    <input
+      id="gallery-input"
+      type="file"
+      accept="image/*"
+      {{on "change" this.handleGalleryInput}}
+      class="hidden-input"
+      multiple
+    />
+  {{/if}}
+</div>
+
+<div id="image-preview-container" class="d-flex flex-column justify-content-center mt-1 overflow-auto">
+  {{#each this.images as |image|}}
+   <ul class="list-group">
+      <figure class="image is-128x128">
+        <img src={{image.src}}>
+      </figure>
+   </ul>
+  {{/each}}
+</div>
